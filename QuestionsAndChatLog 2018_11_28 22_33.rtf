@@ -1,0 +1,287 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fswiss\fcharset0 MS Shell Dlg;}}
+{\colortbl ;\red0\green0\blue0;\red255\green255\blue255;\red121\green121\blue121;\red59\green182\blue60;}
+\viewkind4\uc1\pard\cf1\b\f0\fs17 Questions/Chat Log   J:\\Programming\\Eclipse\\Edureka\\QuestionsAndChatLog 2018_11_28 22_33.rtf\b0\par
+\cf2\par
+\cf3 Q: Yes\cf2\par
+\par
+\cf3 Q: yes\cf2\par
+\par
+\cf4\b Sunil (to All - Entire Audience)\b0 : \cf1 9:18 PM: http://www.dneonline.com/calculator.asmx?wsdl\par
+http://www.xignite.com/xcurrencies.asmx?wsdl\par
+\par
+1) Currency Conversion:\par
+Service Endpoint : http://currencyconverter.kowabunga.net/converter.asmx?wsdl\par
+\par
+a) Create a Dynamic Web Project in Eclipse\par
+b) Create a Web Service Client in the Project\par
+\par
+Client.java\par
+\par
+package org.tempuri;\par
+\par
+import java.math.BigDecimal;\par
+import java.util.Calendar;\par
+\par
+public class Client \{\par
+\par
+\tab public static void main(String[] args) throws Exception\{\par
+\tab\tab ConverterLocator locator=new ConverterLocator(); \par
+\tab\tab ConverterSoap soap=locator.getConverterSoap();\par
+\tab\tab Calendar rateDate=Calendar.getInstance();\par
+\tab\tab System.out.println("Dollar Rate on "+rateDate.getTime());\par
+\tab\tab BigDecimal rate=soap.getConversionRate("USD", "INR", rateDate);\par
+\tab\tab System.out.printf("1 USD = %.2f INR",rate);\par
+\tab\}\par
+\}\cf2\par
+\cf3 Q: yes\cf2\par
+\par
+\cf3 Q: Yes\cf2\par
+\par
+\cf4\b Sunil (to All - Entire Audience)\b0 : \cf1 9:43 PM: 1. Jersey - RESTful Web services in Java\par
+----------------------------------------\par
+\par
+Jersey RESTful Web Services framework is an open source, production quality framework for developing RESTful Web Services in Java that provides support for JAX-RS APIs and serves as a JAX-RS\par
+\par
+1) Download the jersey jar files\par
+\par
+https://jersey.github.io/download.html\par
+\par
+extract the zip file \par
+\par
+2) Create a Web Application in Tomcat web server\par
+c:\\Tomcat 9.0\\webapps\\REST1\par
+\par
+3) Place all the jar files of jersey into c:\\Tomcat 9.0\\webapps\\REST1\\WEB-INF\\lib  + java-json.jar\par
+\par
+\par
+JAX-RS Server Code:\par
+\par
+c:\\Tomcat 9.0\\webapps\\REST1\\WEB-INF\\classes\par
+\par
+Hello.java\par
+\par
+package co.edureka;  \par
+\par
+import javax.ws.rs.GET;  \par
+import javax.ws.rs.Path;  \par
+import javax.ws.rs.Produces;  \par
+import javax.ws.rs.core.MediaType; \cf2\par
+\cf4\b Sunil (to All - Entire Audience)\b0 : \cf1 9:44 PM: @Path("/hello")  \par
+public class Hello \par
+\{  \par
+ @GET  \par
+ @Produces(MediaType.TEXT_PLAIN)  \par
+ public String method1() \{  \par
+  return "Method returns for a PLAIN text request";  \par
+ \}  \par
+\par
+ // This method is called if XML is requested  \par
+ @GET  \par
+ @Produces(MediaType.TEXT_XML)  \par
+ public String method2() \{  \par
+  return "<?xml version=\\"1.0\\"?><hello> Hello Jersey</hello>";  \par
+ \}  \par
+      \par
+ // This method is called if HTML is requested  \par
+ @GET  \par
+ @Produces(MediaType.TEXT_HTML)  \par
+ public String method3() \{  \par
+  return "<html><body><h1>HTML RESPONSE</h1></body></html> ";  \par
+ \}\par
+\par
+ @GET\par
+ @Produces(MediaType.APPLICATION_JSON)\par
+ public String method4()\{\par
+  return "\{empno:101, ename:Sunil, sal:1234\}";\par
+ \}\par
+\}   \cf2\par
+\cf4\b Sunil (to All - Entire Audience)\b0 : \cf1 9:44 PM: Note : \par
+@Path\tab The @Path annotation's value is a relative URI path indicating where the Java class will be hosted: for example, /hello. You can also embed variables in the URIs to make a URI path template. For example, you could ask for the name of a user and pass it to the application as a variable in the URI: /hello/\{username\}.\par
+\par
+@GET\tab The @GET annotation is a request method designator and corresponds to the similarly named HTTP method. The Java method annotated with this request method designator will process HTTP GET requests. The behavior of a resource is determined by the HTTP method to which the resource is responding.\par
+\par
+@Produces \tab The @Produces annotation is used to specify the MIME media types of representations a resource can produce and send back to the client: for example, "text/plain".\cf2\par
+\cf4\b Sunil (to All - Entire Audience)\b0 : \cf1 10:01 PM: 4) WEB-INF/web.xml\cf2\par
+\cf4\b Sunil (to All - Entire Audience)\b0 : \cf1 10:01 PM: <?xml version="1.0" encoding="UTF-8"?>  \par
+<web-app>  \par
+\par
+ <servlet>  \par
+  <servlet-name>jersey</servlet-name>  \par
+  <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>  \par
+   <init-param>  \par
+    <param-name>jersey.config.server.provider.packages</param-name>  \par
+    <param-value>co.edureka</param-value>  \par
+   </init-param>  \par
+   <load-on-startup>1</load-on-startup>  \par
+ </servlet>  \par
+\par
+ <servlet-mapping>  \par
+   <servlet-name>jersey</servlet-name>  \par
+   <url-pattern>/rest/*</url-pattern>  \par
+ </servlet-mapping>  \par
+</web-app>  \cf2\par
+\cf4\b Sunil (to All - Entire Audience)\b0 : \cf1 10:01 PM: 5) Compile Hello.java , after setting the classpath for the jar files\par
+\par
+c:\\Tomcat 9.0\\webapps\\REST1\\WEB-INF\\classes>javac -d . Hello.java\par
+\par
+6) Start Tomcat Server\par
+\par
+7) Open browser and provide the URL as \par
+http://localhost:65535/REST1/rest/hello\cf2\par
+\cf3 Q: yes\cf2\par
+\par
+\cf4\b Sunil (to All - Entire Audience)\b0 : \cf1 10:08 PM: JAX-RS Client Code\par
+\par
+ClientTest.java\par
+---------------\par
+\par
+import java.net.URI;  \par
+import javax.ws.rs.client.Client;  \par
+import javax.ws.rs.client.ClientBuilder;  \par
+import javax.ws.rs.client.WebTarget;  \par
+import javax.ws.rs.core.MediaType;  \par
+import javax.ws.rs.core.UriBuilder;  \par
+import org.glassfish.jersey.client.ClientConfig; \par
+\par
+public class ClientTest\par
+\{  \par
+public static void main(String[] args) throws Exception\par
+\{  \par
+ ClientConfig config=new ClientConfig();  \par
+ Client client=ClientBuilder.newClient(config);  \par
+\par
+ URI baseURI=UriBuilder.fromUri("http://localhost:65535/REST1").build();\par
+\par
+ WebTarget target=client.target(baseURI);  \cf2\par
+\cf4\b Sunil (to All - Entire Audience)\b0 : \cf1 10:08 PM:  System.out.println(target.path("rest").path("hello").request().accept(MediaType.TEXT_PLAIN).get(String.class));\par
+\par
+ System.out.println(target.path("rest").path("hello").request().accept(MediaType.TEXT_XML).get(String.class));  \par
+\par
+ System.out.println(target.path("rest").path("hello").request().accept(MediaType.TEXT_HTML).get(String.class));  \par
+\par
+ String json_response= target.path("rest").path("hello").request().accept(MediaType.APPLICATION_JSON).get(String.class);\par
+\par
+ System.out.println(json_response);\par
+\cf2\par
+\cf4\b Sunil (to All - Entire Audience)\b0 : \cf1 10:32 PM: Using Jersey-2 in Eclipse\par
+=========================\par
+- intergrate Tomcat Server with Eclipse\par
+\par
+1) Create a Maven Project in Eclipse\par
+File > New > Maven Project\par
+  > Next\par
+  > Select "org.apache.maven.archetypes"  maven-archetype-webapp\par
+  > Next\par
+     Group Id\tab  : co.edureka\par
+     Artifact Id : REST2\par
+  > Finish\par
+\par
+2) In pom.xml - add the additional dependencies for Servlet and Jersey 2.x\par
+\par
+mvnrepository.com > Search for "Jersey Container Servlet" & "servlet" & "jersey-hk2"\par
+\par
+<dependencies>\par
+<dependency>\par
+    <groupId>javax.servlet</groupId>\par
+    <artifactId>javax.servlet-api</artifactId>\par
+    <version>3.1.0</version>\par
+    <scope>provided</scope>\par
+</dependency>\par
+\par
+<dependency>\par
+    <groupId>org.glassfish.jersey.containers</groupId>\par
+    <artifactId>jersey-container-servlet</artifactId>\par
+    <version>2.27</version>\par
+</dependency>\par
+<dependency>\par
+    <groupId>org.glassfish.jersey.inject</groupId>\par
+    <artifactId>jersey-hk2</artifactId>\par
+    <version>2.27</version>\par
+</dependency>\par
+</dependencies>\cf2\par
+\cf4\b Sunil (to All - Entire Audience)\b0 : \cf1 10:32 PM: 2) src/main/webapp/WEB-INF/web.xml\par
+<web-app>\par
+<servlet>  \par
+  <servlet-name>jersey</servlet-name>  \par
+  <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>  \par
+   <init-param>  \par
+    <param-name>jersey.config.server.provider.packages</param-name>  \par
+    <param-value>co.edureka</param-value>  \par
+   </init-param>  \par
+   <load-on-startup>1</load-on-startup>  \par
+ </servlet>  \par
+\par
+ <servlet-mapping>  \par
+   <servlet-name>jersey</servlet-name>  \par
+   <url-pattern>/rest/*</url-pattern>  \par
+ </servlet-mapping>  \par
+</web-app>\par
+\par
+\par
+\par
+3) For Java Resources > src/main/java\par
+[Right click on Project Node > Build Path > Configure Build Path > Libraries >\par
+Click on "JRE System Library" > Edit > Enable "Workspace Default JRE"]\cf2\par
+\cf4\b Sunil (to All - Entire Audience)\b0 : \cf1 10:32 PM: 4) Create a Package with name : co.edureka\par
+\tab\par
+5) Create a Java class in co.edureka package with name : EdurekaServices\par
+EdurekaServices.java\par
+\par
+package co.edureka;\par
+\par
+import javax.ws.rs.GET;\par
+import javax.ws.rs.Path;\par
+import javax.ws.rs.Produces;\par
+import javax.ws.rs.core.Response;\par
+\par
+@Path("/edureka")\par
+public class EdurekaServices \par
+\{\par
+ @GET\par
+ @Produces("text/html")\par
+ public Response localService() \par
+ \{\par
+    String output = "<h2>Local Customer Service Center</h2>";\par
+    return Response.status(200).entity(output).build();\par
+ \}\par
+\par
+ @GET\par
+ @Path("/nri")\par
+ @Produces("text/html")\par
+ public Response nriService() \{\par
+   String output = "<h2>NRI Customer Service Center</h2>";\par
+   return Response.status(200).entity(output).build();\par
+ \} \par
+\}\cf2\par
+\cf4\b Sunil (to All - Entire Audience)\b0 : \cf1 10:32 PM: 6) index.jsp\par
+\par
+<html>\par
+<head>\par
+<style>\par
+a:link,a:visited \par
+\{\par
+ color:blue;\par
+ text-decoration:none;\par
+ font-size:20px;\tab\par
+\}\par
+a:hover\par
+\{\par
+ color:red\par
+\}\par
+</style>\par
+</head>\par
+<body>\par
+<a href="rest/edureka">Local Service</a> | \par
+<a href="rest/edureka/nri">Nri Service</a> |\par
+\par
+</body>\par
+</html>\par
+\par
+\par
+\par
+7) Run As > Run on Server\par
+\par
+8) http://localhost:65535/REST2/rest/edureka\par
+   http://localhost:65535/REST2/rest/edureka/nri\cf0\par
+}
+ 

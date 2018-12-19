@@ -1,0 +1,367 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fswiss\fcharset0 MS Shell Dlg;}}
+{\colortbl ;\red0\green0\blue0;\red255\green255\blue255;\red59\green182\blue60;\red121\green121\blue121;}
+\viewkind4\uc1\pard\cf1\b\f0\fs17 Questions/Chat Log   J:\\Programming\\Eclipse\\Edureka\\QuestionsAndChatLog 2018_11_29 22_36.rtf\b0\par
+\cf2\par
+\cf3\b Sunil (to All - Entire Audience)\b0 : \cf1 8:40 PM: @PathParam Annotation\par
+---------------------\par
+\par
+In RESTful (JAX-RS) web services @PathParam annotation will be used to bind RESTful URL parameter values to the method arguments.\par
+\par
+EdurekaServices.java\par
+-------------------\par
+package co.edureka;\par
+\par
+import javax.ws.rs.GET;\par
+import javax.ws.rs.Path;\par
+import javax.ws.rs.PathParam;\par
+import javax.ws.rs.Produces;\par
+import javax.ws.rs.core.Response;\par
+\par
+@Path("/edureka")\par
+public class EdurekaServices \{\par
+ @GET\par
+ @Path("\{name\}/\{course\}")\par
+ @Produces("text/html")\par
+ public Response enquiry(@PathParam("name") String name, @PathParam("course") String course) \{        \par
+     String output = "<h2>Customer Name - "+name+"<br>Course Name - "+course+"</h2>";\par
+     return Response.status(200).entity(output).build(); \par
+ \}\par
+\}\par
+\par
+Right click on your project > Run As > Run on Server\par
+\par
+http://localhost:65535/REST2/rest/edureka/sunil/java\cf2\par
+\cf3\b Sunil (to All - Entire Audience)\b0 : \cf1 8:45 PM: @QueryParam Annotation\par
+======================\par
+\par
+In RESTful web services (JAX-RS) @QueryParam annotation will be used to get the query parameters from the URL, \par
+\par
+Consider this URL:\par
+http://localhost:65535/REST2/rest/edureka?name=Sunil&course=Java\par
+Here query parameters are name, course and their values are Sunil, Java\par
+\par
+package co.edureka;\par
+\par
+import javax.ws.rs.GET;\par
+import javax.ws.rs.Path;\par
+import javax.ws.rs.PathParam;\par
+import javax.ws.rs.Produces;\par
+import javax.ws.rs.QueryParam;\par
+import javax.ws.rs.core.Response;\par
+\par
+@Path("/edureka")\par
+public class EdurekaService \{\par
+ @GET\par
+ @Produces("text/html")\par
+ public Response enquiry1(@QueryParam("name") String name, @QueryParam("course") String crs) \{\par
+   String output = "<h2>Customer Name : "+name+"<br> Course Name : "+crs+"</h2>";\par
+   return Response.status(200).entity(output).build(); \par
+ \}\par
+\}\par
+\par
+\par
+http://localhost:65535/REST2/rest/edureka?name=Sunil&course=Java\cf2\par
+\cf3\b Sunil (to All - Entire Audience)\b0 : \cf1 8:53 PM: @FormParam Annotation\par
+=====================\par
+By using @FormParam annotation, RESTful web service would accept HTML form parameters sent by the client in the POST request and bind them to the method variables. Generally @FormParam will come into picture when client send the data in POST request, if it is the GET request @QueryParam would be the best choice.\par
+\par
+\par
+1) Registration Page - registration.html\par
+\par
+<html>\par
+<head>\par
+<style type="text/css">\par
+body\par
+\{\par
+ background-color:#4682b4;\par
+ font-family:verdana;\par
+\}\par
+#wrapper\par
+\{\par
+ background-color:#8e4585;\par
+ height:400px;\par
+ width:1150px;\par
+ margin:auto;\par
+ margin-top:120px;\par
+ border-radius:10px;\par
+ padding:20px;\par
+\}\par
+h1\par
+\{\par
+ text-align:center;\par
+ font-size:25px;\par
+\}\cf2\par
+\cf3\b Sunil (to All - Entire Audience)\b0 : \cf1 8:53 PM: table\par
+\{\par
+ width:400px;\par
+ font-size:18px;\par
+ background-color:orange;\par
+ border-radius:15px;\par
+ padding:10px;\par
+\}\par
+tr\par
+\{\par
+ height: 45px;\par
+\}\par
+</style>\par
+</head>\par
+<body>\par
+<div id="wrapper">\par
+<h1>edureka | registration</h1>\par
+<hr color=blue size=5 width=28%>\par
+<br><br>\par
+<form action="rest/edureka/registerCustomer" method="post">\par
+<table>\par
+<tr>\par
+<td>Name</td>\par
+<td><input type="text" name="name" size="30" autofocus="autofocus" required="required" placeholder="enter name"></td>\par
+</tr>\par
+\par
+<tr>\par
+<td>Age</td>\par
+<td><input type="text" name="age" size="30" required="required"> </td>\par
+</tr>\par
+\par
+<tr>\par
+<td>Address</td>\par
+<td><input type="text" name="addr" size="30" required="required"> </td>\par
+</tr>\par
+\par
+<tr>\par
+<td colspan="2" align="center">\par
+<input type="submit" value="R E G I S T E R">\par
+</td>\par
+</tr>\par
+</table>\par
+</form>\par
+</div>\par
+</body>\par
+</html>\cf2\par
+\cf3\b Sunil (to All - Entire Audience)\b0 : \cf1 8:53 PM: 2) Create a New Java class in co.edureka package : Registration\par
+Registration.java\par
+\par
+package co.edureka;\par
+\par
+import javax.ws.rs.FormParam;\par
+import javax.ws.rs.POST;\par
+import javax.ws.rs.Path;\par
+import javax.ws.rs.Produces;\par
+import javax.ws.rs.core.Response;\par
+\par
+@Path("/edureka")\par
+public class Registration \{\par
+ @POST\par
+ @Path("/registerCustomer")\par
+ @Produces("text/html")\par
+ public Response register(@FormParam("name") String name, @FormParam("age") String age, @FormParam("addr") String address) \par
+ \{\par
+   String output = "<div style=color:red;font-size:25px;>Registration Success::<br> Name - <u>"+name+"</u><br> Age - <u>"+age+"</u><br>Address - <u>"+address+"</u><hr></div>";\par
+   return Response.status(200).entity(output).build();\par
+ \}\par
+\}\cf2\par
+\cf4 Q: Yes \cf2\par
+\par
+\cf4 Q: yes\cf2\par
+\par
+\cf3\b Sunil (to All - Entire Audience)\b0 : \cf1 9:28 PM: package co.edureka.xml;\par
+\par
+import java.io.FileOutputStream;\par
+\par
+import javax.xml.parsers.DocumentBuilder;\par
+import javax.xml.parsers.DocumentBuilderFactory;\par
+import javax.xml.transform.Transformer;\par
+import javax.xml.transform.TransformerFactory;\par
+import javax.xml.transform.dom.DOMSource;\par
+import javax.xml.transform.stream.StreamResult;\par
+\par
+import org.w3c.dom.Document;\par
+import org.w3c.dom.Element;\par
+import org.w3c.dom.Text;\par
+\par
+public class CreateXmlDom \{\par
+\par
+\tab public static void main(String[] args) throws Exception\{\par
+\tab  //create DOM Parser\par
+\tab  DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();\par
+\tab  DocumentBuilder parser = factory.newDocumentBuilder();\par
+\tab  \par
+\tab  Document doc = parser.newDocument();\par
+\tab  Element root = doc.createElement("students");\par
+\tab  doc.appendChild(root);\par
+\tab  \par
+\tab   Element student=doc.createElement("student");\par
+\tab   root.appendChild(student);\cf2\par
+\cf3\b Sunil (to All - Entire Audience)\b0 : \cf1 9:28 PM: \tab   Element name=doc.createElement("name");\par
+\tab   Text name_data=doc.createTextNode("Sunil Joseph");\par
+\tab   name.appendChild(name_data);\par
+\tab   student.appendChild(name);\par
+\tab   \par
+\tab   Element email=doc.createElement("email");\par
+\tab   Text email_data=doc.createTextNode("sunil@hotmail.com");\par
+\tab   email.appendChild(email_data);\par
+\tab   student.appendChild(email);\par
+\tab   \par
+\tab   Element address=doc.createElement("address");\par
+\tab   Text addr_data=doc.createTextNode("Hyderabad");\par
+\tab   address.appendChild(addr_data);\par
+\tab   student.appendChild(address);\par
+\tab   \par
+\tab   TransformerFactory tfactory=TransformerFactory.newInstance();\par
+\tab   Transformer t=tfactory.newTransformer();\par
+\tab   \par
+\tab   FileOutputStream fos=new FileOutputStream("D:/students.xml");\par
+\tab   t.transform(new DOMSource(doc),new StreamResult(fos));\par
+\tab      \par
+\tab   System.out.println("XML file generated..");\tab  \par
+\tab\}\par
+\}\par
+\cf2\par
+\cf4 Q: yes\cf2\par
+\par
+\cf3\b Sunil (to All - Entire Audience)\b0 : \cf1 9:43 PM: <?xml version="1.0" encoding="UTF-8"?>\par
+<company>\par
+\tab <staff id="1001">\par
+\tab\tab <firstname>Sunil</firstname>\par
+\tab\tab <lastname>Joseph</lastname>\par
+\tab\tab <nickname>SJO</nickname>\par
+\tab\tab <salary>1234</salary>\par
+\tab </staff>\par
+\tab <staff id="1002">\par
+\tab\tab <firstname>Tiya</firstname>\par
+\tab\tab <lastname>Sunil</lastname>\par
+\tab\tab <nickname>TS</nickname>\par
+\tab\tab <salary>4567</salary>\par
+\tab </staff>\par
+</company>\cf2\par
+\cf3\b Sunil (to All - Entire Audience)\b0 : \cf1 9:44 PM: package co.edureka.xml;\par
+\par
+import java.io.File;\par
+\par
+import javax.xml.parsers.DocumentBuilder;\par
+import javax.xml.parsers.DocumentBuilderFactory;\par
+\par
+import org.w3c.dom.Document;\par
+import org.w3c.dom.Element;\par
+import org.w3c.dom.Node;\par
+import org.w3c.dom.NodeList;\par
+\par
+public class ReadXmlDom \{\par
+\par
+\tab public static void main(String[] args) throws Exception \{\par
+\tab\tab  DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();\par
+\tab\tab  DocumentBuilder parser = factory.newDocumentBuilder();\par
+\tab\tab  File file = new File("src/co/edureka/xml/staff.xml");\par
+\tab\tab  if(file.exists()) \{\par
+\tab\tab\tab Document doc = parser.parse(file);\par
+\tab\tab\tab Element root = doc.getDocumentElement();\par
+\tab\tab\tab System.out.println("Root Element = "+root.getNodeName());\par
+\tab\tab\tab\par
+\tab\tab\tab NodeList staff_list = root.getElementsByTagName("staff");\par
+\tab\tab\tab System.out.println("No of Staffs = "+staff_list.getLength());\par
+\tab\tab\tab System.out.println("------------------------------------");\cf2\par
+\cf3\b Sunil (to All - Entire Audience)\b0 : \cf1 9:44 PM: \tab\tab\tab for(int i=0;i<staff_list.getLength();i++) \{\par
+\tab\tab\tab\tab Node node = staff_list.item(i);\par
+\tab\tab\tab\tab if(node.getNodeType() == Node.ELEMENT_NODE) \{\par
+\tab\tab\tab\tab\tab Element staff = (Element)node;\par
+\tab\tab\tab\tab\tab System.out.println("STAFF ID = "+staff.getAttribute("id"));\par
+\tab\tab\tab\tab\tab System.out.println("First Name : "+staff.getElementsByTagName("firstname").item(0).getTextContent());\par
+\tab\tab\tab\tab\tab System.out.println("Last  Name : "+staff.getElementsByTagName("lastname").item(0).getTextContent());\par
+\tab\tab\tab\tab\tab System.out.println("Nick  Name : "+staff.getElementsByTagName("nickname").item(0).getTextContent());\par
+\tab\tab\tab\tab\tab System.out.println("Salary     : "+staff.getElementsByTagName("salary").item(0).getTextContent());\par
+\tab\tab\tab\tab\tab System.out.println("--------------------------------");\par
+\tab\tab\tab\tab\}\par
+\tab\tab\tab\}\par
+\tab\tab  \}\par
+\tab\tab  else \{\par
+\tab\tab\tab  System.out.println("XML document is not available for parsing!");\par
+\tab\tab  \}\par
+\tab\tab  \par
+\tab\}\par
+\par
+\}\par
+\cf2\par
+\cf3\b Sunil (to All - Entire Audience)\b0 : \cf1 10:02 PM: package co.edureka.xml;\par
+\par
+import java.io.File;\par
+\par
+import javax.xml.parsers.SAXParser;\par
+import javax.xml.parsers.SAXParserFactory;\par
+\par
+import org.xml.sax.Attributes;\par
+import org.xml.sax.SAXException;\par
+import org.xml.sax.helpers.DefaultHandler;\par
+\par
+public class ReadXmlSax \{\par
+\par
+\tab public static void main(String[] args) throws Exception \{\par
+\tab\tab SAXParserFactory factory = SAXParserFactory.newInstance();\par
+\tab\tab SAXParser parser = factory.newSAXParser();\par
+\par
+\tab\tab File file = new File("src/co/edureka/xml/staff.xml");\par
+\tab\tab MyHandler handler = new MyHandler();\par
+\par
+\tab\tab parser.parse(file, handler);\par
+\tab\}\par
+\}\par
+\par
+class MyHandler extends DefaultHandler \{\par
+\tab boolean fname = false;\par
+\tab boolean lname = false;\par
+\tab boolean nname = false;\par
+\tab boolean salary = false;\par
+\cf2\par
+\cf3\b Sunil (to All - Entire Audience)\b0 : \cf1 10:02 PM: \tab @Override\par
+\tab public void startDocument() throws SAXException \{\par
+\tab\tab System.out.println("XML document parsing started");\par
+\tab\}\par
+\par
+\tab @Override\par
+\tab public void endDocument() throws SAXException \{\par
+\tab\tab System.out.println("XML document parsing completed");\par
+\tab\}\par
+\par
+\tab @Override\par
+\tab public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException \{\par
+\tab\tab if (qName.equalsIgnoreCase("staff")) \{\par
+\tab\tab\tab System.out.println("STAFF ID : " + attributes.getValue("id"));\par
+\tab\tab\} else if (qName.equalsIgnoreCase("firstname")) \{\par
+\tab\tab\tab fname = true;\par
+\tab\tab\} else if (qName.equalsIgnoreCase("lastname")) \{\par
+\tab\tab\tab lname = true;\par
+\tab\tab\} else if (qName.equalsIgnoreCase("nickname")) \{\par
+\tab\tab\tab nname = true;\par
+\tab\tab\} else if (qName.equalsIgnoreCase("salary")) \{\par
+\tab\tab\tab salary = true;\par
+\tab\tab\}\par
+\tab\}\par
+\par
+\tab @Override\par
+\tab public void endElement(String uri, String localName, String qName) throws SAXException \{\par
+\tab\tab if (qName.equalsIgnoreCase("staff"))\par
+\tab\tab\tab System.out.println("----------------------------");\par
+\tab\}\par
+\cf2\par
+\cf3\b Sunil (to All - Entire Audience)\b0 : \cf1 10:02 PM: \tab public void characters(char[] ch, int start, int length) throws SAXException \{\par
+\tab\tab String data = new String(ch, start, length);\par
+\tab\tab if (fname) \{\par
+\tab\tab\tab System.out.println("First Name : " + data);\par
+\tab\tab\tab fname = false;\par
+\tab\tab\} else if (lname) \{\par
+\tab\tab\tab System.out.println("Last Name : " + data);\par
+\tab\tab\tab lname = false;\par
+\tab\tab\} else if (nname) \{\par
+\tab\tab\tab System.out.println("Nick Name : " + data);\par
+\tab\tab\tab nname = false;\par
+\tab\tab\} else if (salary) \{\par
+\tab\tab\tab System.out.println("Salary : " + data);\par
+\tab\tab\tab salary = false;\par
+\tab\tab\}\par
+\tab\}\par
+\}\par
+\cf2\par
+\cf4 Q: yes\cf2\par
+\par
+\cf4 Q: joysinoop@gmail.com\cf2\par
+\cf0\par
+}
+ 

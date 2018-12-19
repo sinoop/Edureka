@@ -1,0 +1,23 @@
+
+10:16 PM: Variables:
+----------
+Variables are used for storing data
+
+Identifier/Variable Naming Rules:
+----------------------------------
+a) A variable name can have alpha-numeric characters (a-z, A-Z, 0-9), underscore (_) and dollar ($) symbol
+
+b) A variable name should start with a letter or underscore or dollar symbol
+
+c) No space is allowed between the characters of a variable name
+
+d) Variable names are case sensitive  
+
+e) A variable name should not be a reserved keyword of java
+
+Examples:
+firstName
+last_name
+_age
+$sal
+_$_
